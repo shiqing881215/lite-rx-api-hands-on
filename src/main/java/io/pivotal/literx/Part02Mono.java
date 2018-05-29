@@ -21,6 +21,13 @@ public class Part02Mono {
 
   // ========================================================================================
 
+  // TODO Return an empty Mono from null value
+  Mono<String> emptyMonoFromNull() {
+    return null;
+  }
+
+  // ========================================================================================
+
   // TODO Return a Mono that never emits any signal
   Mono<String> monoWithNoSignal() {
     return null;

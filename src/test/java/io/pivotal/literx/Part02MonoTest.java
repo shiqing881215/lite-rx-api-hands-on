@@ -28,6 +28,14 @@ public class Part02MonoTest {
   // ========================================================================================
 
   @Test
+  public void emptyFromNull() {
+    Mono<String> mono = workshop.emptyMonoFromNull();
+    StepVerifier.create(mono).verifyComplete();
+  }
+
+  // ========================================================================================
+
+  @Test
   public void noSignal() {
     Mono<String> mono = workshop.monoWithNoSignal();
     StepVerifier.create(mono)

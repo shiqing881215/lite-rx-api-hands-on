@@ -43,8 +43,16 @@ public class Part01Flux {
 
   // ========================================================================================
 
-  // TODO Create a Flux that emits increasing values from 0 to 9 each 100ms
-  Flux<Long> counter() {
+  // TODO Create a Flux that emits increasing values from 0 to 9
+  Flux<Integer> counter() {
     return null;
   }
+
+	// ========================================================================================
+
+	// TODO Create a Flux that emits increasing values from 0 to 9 from a stream
+	Flux<Integer> counterFromStream() {
+		return null;
+	}
+
 }

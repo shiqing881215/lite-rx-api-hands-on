@@ -21,7 +21,6 @@ public class Part01FluxTest {
   @Test
   public void empty() {
     Flux<String> flux = workshop.emptyFlux();
-
     StepVerifier.create(flux).verifyComplete();
   }
 
@@ -52,8 +51,16 @@ public class Part01FluxTest {
   // ========================================================================================
 
   @Test
-  public void countEach100ms() {
-    Flux<Long> flux = workshop.counter();
-    StepVerifier.create(flux).expectNext(0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L).verifyComplete();
+  public void countEach() {
+    Flux<Integer> flux = workshop.counter();
+    StepVerifier.create(flux).expectNext(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).verifyComplete();
   }
+
+	// ========================================================================================
+
+	@Test
+	public void countEachFromStream() {
+		Flux<Integer> flux = workshop.counterFromStream();
+		StepVerifier.create(flux).expectNext(0, 1, 2, 3, 4, 5, 6, 7, 8, 9).verifyComplete();
+	}
 }
