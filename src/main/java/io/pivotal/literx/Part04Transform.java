@@ -1,6 +1,7 @@
 package io.pivotal.literx;
 
 import io.pivotal.literx.domain.User;
+import java.time.Duration;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -37,6 +38,7 @@ public class Part04Transform {
         new User(
             u.getUsername().toUpperCase(),
             u.getFirstname().toUpperCase(),
-            u.getLastname().toUpperCase()));
+            u.getLastname().toUpperCase()))
+        .delayElement(Duration.ofMillis(100));
   }
 }
