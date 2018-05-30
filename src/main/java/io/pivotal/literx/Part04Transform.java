@@ -33,6 +33,13 @@ public class Part04Transform {
     return null;
   }
 
+  // ========================================================================================
+
+  // TODO Filter out user with firstName starting with the letter 'S'.
+  Flux<User> filterNameStartingWithS(Flux<User> flux) {
+    return null;
+  }
+
   Mono<User> asyncCapitalizeUser(User u) {
     return Mono.just(
         new User(

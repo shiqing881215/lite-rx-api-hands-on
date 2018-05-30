@@ -55,4 +55,16 @@ public class Part04TransformTest {
             new User("SGOODMAN", "SAUL", "GOODMAN"))
         .verifyComplete();
   }
+
+  // ========================================================================================
+
+  @Test
+  public void filterFlux() {
+    Flux<User> flux = repository.findAll();
+    StepVerifier.create(workshop.filterNameStartingWithS(flux))
+        .expectNext(
+            new User("jpinkman", "Jesse", "Pinkman"),
+            new User("wwhite", "Walter", "White"))
+        .verifyComplete();
+  }
 }
