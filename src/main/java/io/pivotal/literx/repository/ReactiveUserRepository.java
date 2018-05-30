@@ -63,6 +63,12 @@ public class ReactiveUserRepository implements ReactiveRepository<User> {
     return withDelay(Mono.just(user));
   }
 
+  public Flux<User> getAll() {
+    return Flux.fromIterable(users)
+        .concatWithValues(User.SYLVAIN, User.JULIEN)
+        .delayElements(Duration.ofMillis(350));
+  }
+
   private Mono<User> withDelay(Mono<User> userMono) {
     return Mono.delay(Duration.ofMillis(delayInMs)).flatMap(c -> userMono);
   }

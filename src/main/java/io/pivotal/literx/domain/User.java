@@ -6,6 +6,10 @@ public class User {
   public static final User JESSE = new User("jpinkman", "Jesse", "Pinkman");
   public static final User WALTER = new User("wwhite", "Walter", "White");
   public static final User SAUL = new User("sgoodman", "Saul", "Goodman");
+  public static final User SYLVAIN = new User("sgoodman", "Sylvain", "Goodman");
+  public static final User JULIEN = new User("jhoarau", "Julien", null);
+
+  public static final User UNKNOWN_USER = null;
 
   private final String username;
 
