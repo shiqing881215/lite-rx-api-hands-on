@@ -41,6 +41,10 @@ public class StarWarsUsersRepository implements ReactiveRepository<User> {
         .single();
   }
 
+  public Flux<User> loadUser(int page) {
+    return Flux.empty();
+  }
+
   /**
    * Transform a list of users into Star wars characters!
    * @param users
