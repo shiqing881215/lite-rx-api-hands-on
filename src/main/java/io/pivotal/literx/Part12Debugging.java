@@ -2,7 +2,7 @@ package io.pivotal.literx;
 
 import io.pivotal.literx.domain.User;
 import io.pivotal.literx.repository.ReactiveUserRepository;
-import io.pivotal.literx.repository.StarWarsUsersRepository;
+import io.pivotal.literx.repository.ReactiveStarWarsUsersRepository;
 import java.util.function.Consumer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Hooks;
@@ -18,10 +18,10 @@ import reactor.core.publisher.Hooks;
 public class Part12Debugging {
 
   ReactiveUserRepository userRepository = new ReactiveUserRepository();
-  StarWarsUsersRepository starWarsUsersRepository = new StarWarsUsersRepository();
+  ReactiveStarWarsUsersRepository reactiveStarWarsUsersRepository = new ReactiveStarWarsUsersRepository();
 
   Flux<User> starWarsifyUsers() {
-    return starWarsUsersRepository.starWarsify(userRepository.getAll());
+    return reactiveStarWarsUsersRepository.starWarsify(userRepository.getAll());
   }
 
   // ========================================================================================

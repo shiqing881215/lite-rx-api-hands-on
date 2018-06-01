@@ -9,7 +9,7 @@ import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class StarWarsUsersRepository implements ReactiveRepository<User> {
+public class ReactiveStarWarsUsersRepository implements ReactiveRepository<User> {
 
   private static final Duration DEFAULT_DELAY = Duration.ofMillis(500);
 

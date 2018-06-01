@@ -13,6 +13,11 @@ public class BlockingUserRepository implements BlockingRepository<User> {
     reactiveRepository = new ReactiveUserRepository();
   }
 
+  public BlockingUserRepository(
+      ReactiveRepository<User> reactiveRepository) {
+    this.reactiveRepository = reactiveRepository;
+  }
+
   public BlockingUserRepository(long delayInMs) {
     reactiveRepository = new ReactiveUserRepository(delayInMs);
   }
