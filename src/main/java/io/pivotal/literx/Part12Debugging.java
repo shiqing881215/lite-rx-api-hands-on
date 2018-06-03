@@ -20,14 +20,14 @@ public class Part12Debugging {
   ReactiveUserRepository userRepository = new ReactiveUserRepository();
   ReactiveStarWarsUsersRepository reactiveStarWarsUsersRepository = new ReactiveStarWarsUsersRepository();
 
+  // TODO Find the bug using the tools we've talked about or just reading the code
   Flux<User> starWarsifyUsers() {
     return reactiveStarWarsUsersRepository.starWarsify(userRepository.getAll());
   }
 
   // ========================================================================================
 
-  // TODO Return a Flux with all users stored in the repository that prints automatically logs for
-  // all Reactive Streams signals
+  // TODO Call userRepository.findAll() and logs all signals
   Flux<User> fluxWithLog() {
     return null;
   }
