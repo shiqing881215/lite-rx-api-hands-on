@@ -16,6 +16,8 @@
 
 package io.pivotal.literx;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.pivotal.literx.domain.User;
 import java.time.Duration;
 import org.junit.Test;
@@ -38,36 +40,36 @@ public class Part03StepVerifierTest {
 
   @Test
   public void expectElementsThenComplete() {
-    workshop.expectFooBarComplete(Flux.just("foo", "bar"));
+    assertThat(workshop.expectFooBarComplete(Flux.just("foo", "bar"))).isNotNull();
   }
 
   // ========================================================================================
 
   @Test
   public void expect2ElementsThenError() {
-    workshop.expectFooBarError(
-        Flux.just("foo", "bar").concatWith(Mono.error(new RuntimeException())));
+    assertThat(workshop.expectFooBarError(
+        Flux.just("foo", "bar").concatWith(Mono.error(new RuntimeException())))).isNotNull();
   }
 
   // ========================================================================================
 
   @Test
   public void expectElementsWithThenComplete() {
-    workshop.expectSkylerJesseComplete(
-        Flux.just(new User("swhite", null, null), new User("jpinkman", null, null)));
+    assertThat(workshop.expectSkylerJesseComplete(
+        Flux.just(new User("swhite", null, null), new User("jpinkman", null, null)))).isNotNull();
   }
 
   // ========================================================================================
 
   @Test
   public void count() {
-    workshop.expect10Elements(Flux.interval(Duration.ofSeconds(1)).take(10));
+    assertThat(workshop.expect10Elements(Flux.interval(Duration.ofSeconds(1)).take(10))).isNotNull();
   }
 
   // ========================================================================================
 
   @Test
   public void countWithVirtualTime() {
-    workshop.expect3600Elements(() -> Flux.interval(Duration.ofSeconds(1)).take(3600));
+    assertThat(workshop.expect3600Elements(() -> Flux.interval(Duration.ofSeconds(1)).take(3600))).isNotNull();
   }
 }
