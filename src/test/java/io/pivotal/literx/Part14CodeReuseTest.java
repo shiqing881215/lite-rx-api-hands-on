@@ -12,7 +12,7 @@ public class Part14CodeReuseTest {
   ReactiveUserRepository reactiveUserRepository = new ReactiveUserRepository();
 
   @Test
-  public void xxx() {
+  public void testTakeMoreAndMore() {
     final Flux<User> users = reactiveUserRepository.getAll();
 
     final Flux<User> composed = workshop.takeMoreAndMore(users);
@@ -21,20 +21,20 @@ public class Part14CodeReuseTest {
         .expectComplete()
         .verify();
 
-//    StepVerifier.create(composed)
-//        .expectNextCount(2)
-//        .expectComplete()
-//        .verify();
-//
-//    StepVerifier.create(composed)
-//        .expectNextCount(3)
-//        .expectComplete()
-//        .verify();
-//
-//    StepVerifier.create(composed)
-//        .expectNextCount(4)
-//        .expectComplete()
-//        .verify();
+    StepVerifier.create(composed)
+        .expectNextCount(2)
+        .expectComplete()
+        .verify();
+
+    StepVerifier.create(composed)
+        .expectNextCount(3)
+        .expectComplete()
+        .verify();
+
+    StepVerifier.create(composed)
+        .expectNextCount(4)
+        .expectComplete()
+        .verify();
   }
 
 

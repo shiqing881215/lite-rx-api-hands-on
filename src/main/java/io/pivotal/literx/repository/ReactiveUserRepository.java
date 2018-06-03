@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.reactivestreams.Publisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public class ReactiveUserRepository implements ReactiveRepository<User> {
+  private static final Logger log = LoggerFactory.getLogger(ReactiveUserRepository.class);
 
   private static final long DEFAULT_DELAY_IN_MS = 100;
 
