@@ -23,8 +23,9 @@ public class Part13ExecutionContextTest {
   private final Scheduler yellow = Schedulers.newSingle("yellow");
 
 
+  // TODO Find on which thread is each operator executing
   @Test
-  public void readingTeaLeaves() {
+  public void findExecutionContextForEachOperator() {
     final Flux<Integer> source = Flux.range(0, 10)
         .map(integer -> integer * 2)
         .subscribeOn(blue)
@@ -32,7 +33,6 @@ public class Part13ExecutionContextTest {
         .map(integer -> integer * 4)
         .flatMap(this::zeroIfEven)
         .subscribeOn(red);
-
 
     StepVerifier.create(source)
         .expectNextCount(10)
