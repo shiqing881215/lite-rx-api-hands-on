@@ -26,7 +26,7 @@ public class Part06Request {
   // ========================================================================================
 
   // TODO Create a StepVerifier that initially requests 1 value and expects User.SKYLER then
-  // requests another value and expects User.JESSE.
+  // requests another value and expects User.JESSE and then cancel.
   StepVerifier requestOneExpectSkylerThenRequestOneExpectJesse(Flux<User> flux) {
     return null;
   }
