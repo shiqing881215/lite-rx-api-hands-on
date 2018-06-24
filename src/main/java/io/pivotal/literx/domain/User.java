@@ -13,26 +13,26 @@ public class User {
 
   private final String username;
 
-  private final String firstname;
+  private final String firstName;
 
-  private final String lastname;
+  private final String lastName;
 
-  public User(String username, String firstname, String lastname) {
+  public User(String username, String firstName, String lastName) {
     this.username = username;
-    this.firstname = firstname;
-    this.lastname = lastname;
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
   public String getUsername() {
     return username;
   }
 
-  public String getFirstname() {
-    return firstname;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public String getLastname() {
-    return lastname;
+  public String getLastName() {
+    return lastName;
   }
 
   @Override
@@ -49,17 +49,17 @@ public class User {
     if (!username.equals(user.username)) {
       return false;
     }
-    if (!firstname.equals(user.firstname)) {
+    if (!firstName.equals(user.firstName)) {
       return false;
     }
-    return lastname.equals(user.lastname);
+    return lastName.equals(user.lastName);
   }
 
   @Override
   public int hashCode() {
     int result = username.hashCode();
-    result = 31 * result + firstname.hashCode();
-    result = 31 * result + lastname.hashCode();
+    result = 31 * result + firstName.hashCode();
+    result = 31 * result + lastName.hashCode();
     return result;
   }
 
@@ -70,10 +70,10 @@ public class User {
         + username
         + '\''
         + ", firstname='"
-        + firstname
+        + firstName
         + '\''
         + ", lastname='"
-        + lastname
+        + lastName
         + '\''
         + '}';
   }

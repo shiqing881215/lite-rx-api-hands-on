@@ -15,7 +15,6 @@ import java.util.List;
  *
  * @see java.util.concurrent.Future
  * @see java.util.concurrent.ExecutorService
- * @see java.util.concurrent.CompletableFuture
  *
  */
 public class Part00WithoutReactive {
@@ -23,7 +22,7 @@ public class Part00WithoutReactive {
   private BlockingRepository<User> userRepository = new BlockingUserRepository();
   private BlockingRepository<User> starWarsCharacterRepository = new BlockingUserRepository(new ReactiveStarWarsUsersRepository());
 
-  // TODO Change this method so we call both findAll() in parallel using Future/CompletableFuture
+  // TODO Change this method so we call both findAll() in parallel using Future
   public List<User> findAllUsersAsStarWarsCharacter() {
     final Iterable<User> characters = starWarsCharacterRepository.findAll();
     final Iterable<User> users = userRepository.findAll();
@@ -48,6 +47,6 @@ public class Part00WithoutReactive {
   }
 
   private User toStarWarsUser(User user, User character) {
-    return new User(user.getUsername(), character.getFirstname(), user.getLastname());
+    return new User(user.getUsername(), character.getFirstName(), user.getLastName());
   }
 }

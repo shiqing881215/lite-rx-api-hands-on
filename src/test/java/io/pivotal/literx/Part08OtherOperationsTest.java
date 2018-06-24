@@ -30,20 +30,20 @@ public class Part08OtherOperationsTest {
             User.JESSE.getUsername(),
             User.WALTER.getUsername(),
             User.SAUL.getUsername());
-    Flux<String> firstnameFlux =
+    Flux<String> firstNameFlux =
         Flux.just(
-            User.SKYLER.getFirstname(),
-            User.JESSE.getFirstname(),
-            User.WALTER.getFirstname(),
-            User.SAUL.getFirstname());
-    Flux<String> lastnameFlux =
+            User.SKYLER.getFirstName(),
+            User.JESSE.getFirstName(),
+            User.WALTER.getFirstName(),
+            User.SAUL.getFirstName());
+    Flux<String> lastNameFlux =
         Flux.just(
-            User.SKYLER.getLastname(),
-            User.JESSE.getLastname(),
-            User.WALTER.getLastname(),
-            User.SAUL.getLastname());
+            User.SKYLER.getLastName(),
+            User.JESSE.getLastName(),
+            User.WALTER.getLastName(),
+            User.SAUL.getLastName());
     Flux<User> userFlux =
-        workshop.userFluxFromStringFlux(usernameFlux, firstnameFlux, lastnameFlux);
+        workshop.userFluxFromStringFlux(usernameFlux, firstNameFlux, lastNameFlux);
     StepVerifier.create(userFlux)
         .expectNext(User.SKYLER, User.JESSE, User.WALTER, User.SAUL)
         .verifyComplete();

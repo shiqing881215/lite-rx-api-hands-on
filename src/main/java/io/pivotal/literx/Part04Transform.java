@@ -14,21 +14,21 @@ public class Part04Transform {
 
   // ========================================================================================
 
-  // TODO Capitalize the user username, firstname and lastname
+  // TODO Switch user username, firstName and lastName to uppercase
   Mono<User> capitalizeOne(Mono<User> mono) {
     return null;
   }
 
   // ========================================================================================
 
-  // TODO Capitalize the users username, firstName and lastName
+  // TODO Switch the users username, firstName and lastName to uppercase
   Flux<User> capitalizeMany(Flux<User> flux) {
     return null;
   }
 
   // ========================================================================================
 
-  // TODO Capitalize the users username, firstName and lastName using #asyncCapitalizeUser
+  // TODO Switch the users username, firstName and lastName to uppercase using #asyncUserToUppercase
   Flux<User> asyncCapitalizeMany(Flux<User> flux) {
     return null;
   }
@@ -40,12 +40,12 @@ public class Part04Transform {
     return null;
   }
 
-  Mono<User> asyncCapitalizeUser(User u) {
+  Mono<User> asyncUserToUppercase(User u) {
     return Mono.just(
         new User(
             u.getUsername().toUpperCase(),
-            u.getFirstname().toUpperCase(),
-            u.getLastname().toUpperCase()))
+            u.getFirstName().toUpperCase(),
+            u.getLastName().toUpperCase()))
         .delayElement(Duration.ofMillis(100));
   }
 }

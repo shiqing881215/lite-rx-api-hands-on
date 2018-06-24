@@ -57,7 +57,7 @@ public class Part07Errors {
     if (user.equals(User.SAUL)) {
       throw new GetOutOfHereException();
     }
-    return new User(user.getUsername(), user.getFirstname(), user.getLastname());
+    return new User(user.getUsername(), user.getFirstName(), user.getLastName());
   }
 
   protected final class GetOutOfHereException extends Exception {}

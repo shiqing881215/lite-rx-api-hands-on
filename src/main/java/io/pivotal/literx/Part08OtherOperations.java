@@ -13,9 +13,9 @@ public class Part08OtherOperations {
 
   // ========================================================================================
 
-  // TODO Create a Flux of user from Flux of username, firstname and lastname.
+  // TODO Create a Flux of user from Flux of username, firstName and lastName.
   Flux<User> userFluxFromStringFlux(
-      Flux<String> usernameFlux, Flux<String> firstnameFlux, Flux<String> lastnameFlux) {
+      Flux<String> usernameFlux, Flux<String> firstNameFlux, Flux<String> lastNameFlux) {
     return null;
   }
 

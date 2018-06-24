@@ -56,14 +56,14 @@ public class ReactiveStarWarsUsersRepository implements ReactiveRepository<User>
   }
 
   private User starWarsify(User user, User character) {
-    if (user.getLastname() != null && character.getLastname() != null) {
-      return new User(user.getUsername(), user.getFirstname(), mixLastname(user, character));
+    if (user.getLastName() != null && character.getLastName() != null) {
+      return new User(user.getUsername(), user.getFirstName(), mixLastname(user, character));
     }
 
     return UNKNOWN_USER;
   }
 
   private String mixLastname(User user, User character) {
-    return user.getLastname().substring(0, 3) + character.getLastname().substring(0, 3);
+    return user.getLastName().substring(0, 3) + character.getLastName().substring(0, 3);
   }
 }
