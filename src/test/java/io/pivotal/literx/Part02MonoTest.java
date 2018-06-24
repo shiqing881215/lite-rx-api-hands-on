@@ -29,7 +29,7 @@ public class Part02MonoTest {
 
   @Test
   public void emptyFromNull() {
-    Mono<String> mono = workshop.emptyMonoFromNull();
+    Mono<String> mono = workshop.emptyMonoFromNull(null);
     StepVerifier.create(mono).verifyComplete();
   }
 

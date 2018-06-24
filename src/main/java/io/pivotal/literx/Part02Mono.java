@@ -1,6 +1,7 @@
 package io.pivotal.literx;
 
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.Nullable;
 
 /**
  * Learn how to create Mono instances.
@@ -21,8 +22,8 @@ public class Part02Mono {
 
   // ========================================================================================
 
-  // TODO Return an empty Mono from null value
-  Mono<String> emptyMonoFromNull() {
+  // TODO Return an empty Mono from nullable input value
+  Mono<String> emptyMonoFromNull(@Nullable String input) {
     return null;
   }
 
