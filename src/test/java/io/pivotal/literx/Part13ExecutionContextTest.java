@@ -1,12 +1,6 @@
 package io.pivotal.literx;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Scheduler;
-import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
 /**
@@ -15,33 +9,22 @@ import reactor.test.StepVerifier;
  * @author Julien Hoarau
  */
 public class Part13ExecutionContextTest {
-  private static final Logger log = LoggerFactory.getLogger(Part13ExecutionContextTest.class);
+  private Part13ExecutionContext workshop = new Part13ExecutionContext();
 
-  private final Scheduler blue = Schedulers.newSingle("blue");
-  private final Scheduler red = Schedulers.newSingle("red");
-  private final Scheduler green = Schedulers.newSingle("green");
-  private final Scheduler yellow = Schedulers.newSingle("yellow");
-
-
-  // TODO Find on which thread is each operator executing
   @Test
   public void findExecutionContextForEachOperator() {
-    final Flux<Integer> source = Flux.range(0, 10)
-        .map(integer -> integer * 2)
-        .subscribeOn(blue)
-        .publishOn(green)
-        .map(integer -> integer * 4)
-        .flatMap(this::zeroIfEven)
-        .subscribeOn(red);
-
-    StepVerifier.create(source)
+    StepVerifier.create(workshop.findWhichExecutionContext())
         .expectNextCount(10)
         .verifyComplete();
   }
 
-  private Mono<Integer> zeroIfEven(int number) {
-    return Mono.just(number % 2 == 0 ? 0 : number)
-        .subscribeOn(yellow);
+  @Test
+  public void shouldEmitThreadNames() {
+    StepVerifier.create(workshop.usePublishSubscribe())
+        .expectNext("blue-1")
+        .expectNext("red-2")
+        .expectNext("yellow-3")
+        .expectNext("green-4")
+        .verifyComplete();
   }
-
 }

@@ -24,6 +24,7 @@ public class Part15CustomPublisherTest {
   @Test
   public void testInterval() {
     final Duration duration = StepVerifier.create(workshop.interval())
+        .expectNext(0)
         .expectNext(1)
         .expectNext(2)
         .expectNext(3)
