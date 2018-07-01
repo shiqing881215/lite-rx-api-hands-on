@@ -22,7 +22,7 @@ public class ReactiveStarWarsUsersRepository implements ReactiveRepository<User>
 
   @Override
   public Mono<Void> save(Publisher<User> publisher) {
-    return Mono.error(new RuntimeException("You do you think you are? George Lucas?"));
+    return Mono.error(new RuntimeException("Who do you think you are? George Lucas?"));
   }
 
   @Override
