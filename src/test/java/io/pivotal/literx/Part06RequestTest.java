@@ -78,8 +78,10 @@ public class Part06RequestTest {
     StepVerifier.create(workshop.customPublisher(), 0)
         .expectSubscription()
         .expectNoEvent(Duration.ofSeconds(1))
-        .thenRequest(10)
-        .expectNextCount(10)
+        .thenRequest(5)
+        .expectNextCount(5)
+        .thenRequest(5)
+        .expectNextCount(5)
         .verifyComplete();
   }
 }
