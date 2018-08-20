@@ -21,10 +21,10 @@ public class Part13ExecutionContextTest {
   @Test
   public void shouldEmitThreadNames() {
     StepVerifier.create(workshop.usePublishSubscribe())
-        .expectNext("blue-1")
-        .expectNext("red-2")
-        .expectNext("yellow-3")
-        .expectNext("green-4")
+        .expectNextMatches(s -> s.startsWith("blue-"))
+        .expectNextMatches(s -> s.startsWith("red-"))
+        .expectNextMatches(s -> s.startsWith("yellow-"))
+        .expectNextMatches(s -> s.startsWith("green-"))
         .verifyComplete();
   }
 }
