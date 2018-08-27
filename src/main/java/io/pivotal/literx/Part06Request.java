@@ -26,9 +26,7 @@ public class Part06Request {
   // TODO Create a StepVerifier that initially requests all values and expect 4 values to be
   // received
   StepVerifier requestAllExpectFour(Flux<User> flux) {
-    return StepVerifier.create(flux)
-        .expectNextCount(4)
-        .expectComplete();
+    return null;
   }
 
   // ========================================================================================
@@ -36,11 +34,7 @@ public class Part06Request {
   // TODO Create a StepVerifier that initially requests 1 value and expects User.SKYLER then
   // requests another value and expects User.JESSE and then cancel.
   StepVerifier requestOneExpectSkylerThenRequestOneExpectJesse(Flux<User> flux) {
-    return StepVerifier.create(flux, 1)
-        .expectNext(User.SKYLER)
-        .thenRequest(1)
-        .expectNext(User.JESSE)
-        .thenCancel();
+    return null;
   }
 
   // TODO Modify the subscriber to only request 4 items.
