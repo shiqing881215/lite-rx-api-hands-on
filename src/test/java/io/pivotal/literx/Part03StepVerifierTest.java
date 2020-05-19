@@ -17,12 +17,14 @@
 package io.pivotal.literx;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
 import io.pivotal.literx.domain.User;
 import java.time.Duration;
 import org.junit.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 /**
  * Learn how to use StepVerifier to test Mono, Flux or any other kind of Reactive Streams Publisher.
@@ -71,5 +73,20 @@ public class Part03StepVerifierTest {
   @Test
   public void countWithVirtualTime() {
     assertThat(workshop.expect3600Elements(() -> Flux.interval(Duration.ofSeconds(1)).take(3600))).isNotNull();
+  }
+
+
+  @Test
+  public void flatMap() {
+
+    Flux.range(0, 20)
+        .flatMap(integer -> Mono.fromCallable(() -> {
+          System.out.println(Thread.currentThread().getName() + ": " + integer);
+          return integer;
+        }).subscribeOn(Schedulers.elastic())
+        )
+        .subscribe();
+
+
   }
 }

@@ -1,6 +1,7 @@
 package io.pivotal.literx;
 
 import io.pivotal.literx.domain.User;
+import java.util.Arrays;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -16,21 +17,23 @@ public class Part08OtherOperations {
   // TODO Create a Flux of user from Flux of username, firstName and lastName.
   Flux<User> userFluxFromStringFlux(
       Flux<String> usernameFlux, Flux<String> firstNameFlux, Flux<String> lastNameFlux) {
-    return null;
+
+    return Flux.zip(usernameFlux, firstNameFlux, lastNameFlux)
+        .map(triple -> new User(triple.getT1(), triple.getT2(), triple.getT3()));
   }
 
   // ========================================================================================
 
   // TODO Return the mono which returns its value faster
   Mono<User> useFastestMono(Mono<User> mono1, Mono<User> mono2) {
-    return null;
+    return Mono.first(mono1, mono2);
   }
 
   // ========================================================================================
 
   // TODO Return the flux which returns the first value faster
   Flux<User> useFastestFlux(Flux<User> flux1, Flux<User> flux2) {
-    return null;
+    return Flux.first(flux1, flux2);
   }
 
   // ========================================================================================
@@ -38,7 +41,7 @@ public class Part08OtherOperations {
   // TODO Convert the input Flux<User> to a Mono<Void> that represents the complete signal of the
   // flux
   Mono<Void> fluxCompletion(Flux<User> flux) {
-    return null;
+    return flux.then();
   }
 
   // ========================================================================================
@@ -46,7 +49,7 @@ public class Part08OtherOperations {
   // TODO Return a valid Mono of user for null input and non null input user (hint: Reactive Streams
   // do not accept null values)
   Mono<User> nullAwareUserToMono(User user) {
-    return null;
+    return Mono.justOrEmpty(user);
   }
 
   // ========================================================================================
@@ -54,6 +57,6 @@ public class Part08OtherOperations {
   // TODO Return the same mono passed as input parameter, expect that it will emit User.SKYLER when
   // empty
   Mono<User> emptyToSkyler(Mono<User> mono) {
-    return null;
+    return mono.defaultIfEmpty(User.SKYLER);
   }
 }
