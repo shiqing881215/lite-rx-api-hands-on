@@ -79,9 +79,10 @@ public class Part06RequestTest {
         .expectSubscription()
         .expectNoEvent(Duration.ofSeconds(1))
         .thenRequest(5)
-        .expectNextCount(5)
+        .expectNext(0,1,2,3,4)
         .thenRequest(5)
-        .expectNextCount(5)
+        .expectNext(5,6,7,8,9)
+//        .expectNextCount(5)
         .verifyComplete();
   }
 }

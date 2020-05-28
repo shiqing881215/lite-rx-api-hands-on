@@ -23,7 +23,7 @@ public class Part12DebuggingTest {
   @Test
   public void readingTeaLeaves() {
     StepVerifier.create(workshop.starWarsifyUsers())
-        .expectNextCount(6)
+        .expectNextCount(5)
         .verifyComplete();
   }
 

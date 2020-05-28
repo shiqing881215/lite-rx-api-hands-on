@@ -17,34 +17,34 @@ public class Part02Mono {
 
   // TODO Return an empty Mono
   Mono<String> emptyMono() {
-    return null;
+    return Mono.empty();
   }
 
   // ========================================================================================
 
   // TODO Return an empty Mono from nullable input value
   Mono<String> emptyMonoFromNull(@Nullable String input) {
-    return null;
+    return Mono.justOrEmpty(input);
   }
 
   // ========================================================================================
 
   // TODO Return a Mono that never emits any signal
   Mono<String> monoWithNoSignal() {
-    return null;
+    return Mono.never();
   }
 
   // ========================================================================================
 
   // TODO Return a Mono that contains a "foo" value
   Mono<String> fooMono() {
-    return null;
+    return Mono.just("foo");
   }
 
   // ========================================================================================
 
   // TODO Create a Mono that emits an IllegalStateException
   Mono<String> errorMono() {
-    return null;
+    return Mono.error(new IllegalStateException());
   }
 }

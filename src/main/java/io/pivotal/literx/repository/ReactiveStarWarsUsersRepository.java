@@ -4,6 +4,7 @@ import static io.pivotal.literx.domain.User.UNKNOWN_USER;
 
 import io.pivotal.literx.domain.User;
 import java.time.Duration;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
@@ -52,15 +53,17 @@ public class ReactiveStarWarsUsersRepository implements ReactiveRepository<User>
    */
   public Flux<User> starWarsify(Flux<User> users) {
     return Flux.zip(users, findAll().<User>repeat(),
-        (BiFunction<User, User, User>) this::starWarsify);
+        (BiFunction<User, User, Optional<User>>) this::starWarsify)
+        .filter(Optional::isPresent)
+        .map(Optional::get);
   }
 
-  private User starWarsify(User user, User character) {
+  private Optional<User> starWarsify(User user, User character) {
     if (user.getLastName() != null && character.getLastName() != null) {
-      return new User(user.getUsername(), user.getFirstName(), mixLastname(user, character));
+      return Optional.of(new User(user.getUsername(), user.getFirstName(), mixLastname(user, character)));
     }
 
-    return UNKNOWN_USER;
+    return Optional.empty();
   }
 
   private String mixLastname(User user, User character) {

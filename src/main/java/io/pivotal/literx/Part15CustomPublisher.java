@@ -1,6 +1,9 @@
 package io.pivotal.literx;
 
 import java.time.Duration;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import reactor.core.publisher.Flux;
 
@@ -20,7 +23,15 @@ public class Part15CustomPublisher {
    * @see Flux#range(int, int)
    */
   public Flux<Integer> range(int start, int count) {
-    return Flux.empty();
+    AtomicInteger current = new AtomicInteger(start);
+    return Flux.generate(sink -> {
+      if (current.get() == start + count) {
+        sink.complete();
+        return;
+      }
+
+      sink.next(current.getAndIncrement());
+    });
   }
 
   /**
@@ -29,6 +40,21 @@ public class Part15CustomPublisher {
    * @see Flux#interval(Duration)
    */
   public Flux<Integer> interval() {
-    return Flux.empty();
+
+
+    return Flux.create(sink -> {
+      Timer timer = new Timer();
+      AtomicInteger current = new AtomicInteger(0);
+
+      sink.onCancel(timer::cancel);
+      sink.onDispose(timer::cancel);
+
+      timer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+          sink.next(current.getAndIncrement());
+        }
+      }, 0, 100);
+    });
   }
 }

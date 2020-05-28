@@ -29,7 +29,7 @@ public class Part12Debugging {
 
   // TODO Call userRepository.findAll() and logs all signals
   Flux<User> fluxWithLog() {
-    return null;
+    return userRepository.findAll().log();
   }
 
   // ========================================================================================
@@ -38,6 +38,9 @@ public class Part12Debugging {
   // subscribe, "firstName lastName" for all values and "The end!" on complete
   Flux<User> fluxWithDoOnPrintln() {
 
-    return null;
+    return userRepository.findAll()
+        .doOnSubscribe(subscription -> System.out.println("Starring: "))
+        .doOnNext(user -> System.out.println(user.getFirstName() + " " + user.getLastName()))
+        .doOnComplete(() -> System.out.println("The end!"));
   }
 }

@@ -16,28 +16,33 @@ public class Part04Transform {
 
   // TODO Switch user username, firstName and lastName to uppercase
   Mono<User> capitalizeOne(Mono<User> mono) {
-    return null;
+    return mono.map(user -> toUppercase(user));
+  }
+
+  private User toUppercase(User user) {
+    return new User(user.getUsername().toUpperCase(), user.getFirstName().toUpperCase(),
+        user.getLastName().toUpperCase());
   }
 
   // ========================================================================================
 
   // TODO Switch the users username, firstName and lastName to uppercase
   Flux<User> capitalizeMany(Flux<User> flux) {
-    return null;
+    return flux.map(user -> toUppercase(user));
   }
 
   // ========================================================================================
 
   // TODO Switch the users username, firstName and lastName to uppercase using #asyncUserToUppercase
   Flux<User> asyncCapitalizeMany(Flux<User> flux) {
-    return null;
+    return flux.flatMap(user -> asyncUserToUppercase(user));
   }
 
   // ========================================================================================
 
   // TODO Filter out user with firstName starting with the letter 'S'.
   Flux<User> filterNameStartingWithS(Flux<User> flux) {
-    return null;
+    return flux.filter(user -> !user.getFirstName().startsWith("S"));
   }
 
   Mono<User> asyncUserToUppercase(User u) {
