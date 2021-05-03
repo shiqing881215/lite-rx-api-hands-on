@@ -3,6 +3,8 @@ package io.pivotal.literx;
 import io.pivotal.literx.domain.User;
 import io.pivotal.literx.repository.ReactiveRepository;
 import io.pivotal.literx.repository.ReactiveUserRepository;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -111,5 +113,14 @@ public class Part08OtherOperationsTest {
     StepVerifier.create(mono).expectNext(User.WALTER).verifyComplete();
     mono = workshop.emptyToSkyler(Mono.empty());
     StepVerifier.create(mono).expectNext(User.SKYLER).verifyComplete();
+  }
+
+  @Test
+  public void collect() {
+    ReactiveRepository<User> repository = new ReactiveUserRepository();
+    Mono<List<User>> collection = workshop.fluxCollection(repository.findAll());
+    StepVerifier.create(collection)
+        .expectNext(Arrays.asList(User.SKYLER, User.JESSE, User.WALTER, User.SAUL))
+        .verifyComplete();
   }
 }
