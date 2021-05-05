@@ -77,10 +77,10 @@ public class Part06Request {
         .flatMap(aLong -> Flux.just(aLong).delayElements(Duration.ofSeconds(1)));
   }
 
-  // TODO Modify the flux to handle backpressure by only
+  // TODO Modify the flux to handle backpressure by only keeping the latest
   Flux<Long> overflowExceptionLatest() {
     return Flux.interval(Duration.ofMillis(1))
-        .flatMap(aLong -> Flux.just(aLong).delayElements(Duration.ofSeconds(1))).log();
+        .flatMap(aLong -> Flux.just(aLong).delayElements(Duration.ofSeconds(1)));
 
   }
 

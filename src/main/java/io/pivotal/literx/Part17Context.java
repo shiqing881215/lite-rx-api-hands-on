@@ -2,15 +2,18 @@ package io.pivotal.literx;
 
 import io.pivotal.literx.domain.User;
 import io.pivotal.literx.repository.ReactiveUserRepository;
+import java.util.function.Function;
 import reactor.core.publisher.Mono;
 import reactor.util.context.Context;
+import reactor.util.context.ContextView;
 
 /**
  * Learn about Context.
  *
  * @author Julien Hoarau
  * @see reactor.util.context.Context
- * @see Mono#subscriberContext(Context)
+ * @see Mono#deferContextual(Function)
+ * @see Mono#contextWrite(ContextView)
  */
 public class Part17Context {
 

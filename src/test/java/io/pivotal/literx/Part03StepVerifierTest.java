@@ -54,7 +54,7 @@ public class Part03StepVerifierTest {
   // ========================================================================================
 
   @Test
-  public void expectElementsWithThenComplete() {
+  public void expectElementsWithThenCompleteMatch() {
     assertThat(workshop.expectSkylerJesseComplete(
         Flux.just(new User("swhite", null, null), new User("jpinkman", null, null)))).isNotNull();
   }

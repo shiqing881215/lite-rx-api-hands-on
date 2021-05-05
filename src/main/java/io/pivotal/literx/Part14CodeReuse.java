@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
  *
  * @author Julien Hoarau
  * @see Flux#transform(Function)
- * @see Flux#compose(Function)
+ * @see Flux#transformDeferred(Function)
  */
 public class Part14CodeReuse {
 
