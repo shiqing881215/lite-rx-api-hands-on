@@ -74,6 +74,15 @@ public class Part06RequestTest {
   }
 
   @Test
+  public void customPublisherWithoutBackpressureShouldEmit10Items() {
+    StepVerifier.create(workshop.customPublisherNoBackpressure())
+        .expectSubscription()
+        .expectNext(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+        .expectComplete()
+        .verify(Duration.ofSeconds(1));
+  }
+
+  @Test
   public void customPublisherShouldHandleBackpressure() {
     StepVerifier.create(workshop.customPublisher(), 0)
         .expectSubscription()

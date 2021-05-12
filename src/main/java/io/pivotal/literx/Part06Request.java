@@ -84,29 +84,23 @@ public class Part06Request {
 
   }
 
-  // TODO Modify the custom publisher to support backpressure
+
+  // TODO Implement a custom publisher equivalent to Flux.range(0, 10)
+  Publisher<Integer> customPublisherNoBackpressure() {
+    return new Publisher<Integer>() {
+      @Override
+      public void subscribe(Subscriber<? super Integer> s) {
+
+      }
+    };
+  }
+
+  // TODO Implement a custom publisher equivalent to Flux.range(0, 10) that supports backpressure
   Publisher<Integer> customPublisher() {
     return new Publisher<Integer>() {
 
       @Override
       public void subscribe(Subscriber<? super Integer> s) {
-        s.onSubscribe(new Subscription() {
-          @Override
-          public void request(long n) {
-
-          }
-
-          @Override
-          public void cancel() {
-
-          }
-        });
-
-        for (int i = 0; i < 10; i++) {
-          s.onNext(i);
-        }
-
-        s.onComplete();
 
       }
     };
