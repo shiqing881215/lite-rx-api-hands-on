@@ -1,9 +1,10 @@
 package io.pivotal.literx;
 
 import io.pivotal.literx.domain.User;
-import java.time.Duration;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.time.Duration;
 
 /**
  * Learn how to transform values.
@@ -16,28 +17,36 @@ public class Part04Transform {
 
   // TODO Switch user username, firstName and lastName to uppercase
   Mono<User> capitalizeOne(Mono<User> mono) {
-    return null;
+    // map just does a transformation, user -> user
+    return mono.map(user -> {
+      return new User(user.getUsername().toUpperCase(),user.getFirstName().toUpperCase(), user.getLastName().toUpperCase());
+    });
   }
 
   // ========================================================================================
 
   // TODO Switch the users username, firstName and lastName to uppercase
   Flux<User> capitalizeMany(Flux<User> flux) {
-    return null;
+    // map operation is same for both Mono and Flux
+    return flux.map(user -> new User(user.getUsername().toUpperCase(),user.getFirstName().toUpperCase(), user.getLastName().toUpperCase()));
   }
 
   // ========================================================================================
 
   // TODO Switch the users username, firstName and lastName to uppercase using #asyncUserToUppercase
   Flux<User> asyncCapitalizeMany(Flux<User> flux) {
-    return null;
+
+    // let each user to be transformed individually by asyncUserToUppercase, then combine the result back into one Flux
+    // https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html#flatMap-java.util.function.Function-
+    return flux.flatMap(user -> asyncUserToUppercase(user));
   }
 
   // ========================================================================================
 
   // TODO Filter out user with firstName starting with the letter 'S'.
   Flux<User> filterNameStartingWithS(Flux<User> flux) {
-    return null;
+
+    return flux.filter(user -> !user.getFirstName().startsWith("S"));
   }
 
   Mono<User> asyncUserToUppercase(User u) {
