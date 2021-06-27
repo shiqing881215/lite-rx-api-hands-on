@@ -36,7 +36,7 @@ public class Part04Transform {
   // TODO Switch the users username, firstName and lastName to uppercase using #asyncUserToUppercase
   Flux<User> asyncCapitalizeMany(Flux<User> flux) {
 
-    // let each user to be transformed individually by asyncUserToUppercase, then combine the result back into one Flux
+    // let each user to be transformed individually(Async) by asyncUserToUppercase, then combine the result back into one Flux
     // https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html#flatMap-java.util.function.Function-
     return flux.flatMap(user -> asyncUserToUppercase(user));
   }
