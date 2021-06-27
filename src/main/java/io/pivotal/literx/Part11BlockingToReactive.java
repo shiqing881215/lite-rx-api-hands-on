@@ -25,8 +25,11 @@ public class Part11BlockingToReactive {
 
   // TODO Create a Flux for reading all users from the blocking repository deferred until the flux
   // is subscribed, and run it with an elastic scheduler
+
+  // Defer makes it lazy : https://stackoverflow.com/questions/55955567/what-does-mono-defer-do
   Flux<User> blockingRepositoryToFlux(BlockingRepository<User> repository) {
-    return null;
+
+    return Flux.defer(() -> Flux.fromIterable(repository.findAll()).subscribeOn(Schedulers.boundedElastic()));
   }
 
   // ========================================================================================
@@ -34,6 +37,9 @@ public class Part11BlockingToReactive {
   // TODO Insert users contained in the Flux parameter in the blocking repository using an elastic
   // scheduler and return a Mono<Void> that signal the end of the operation
   Mono<Void> fluxToBlockingRepository(Flux<User> flux, BlockingRepository<User> repository) {
-    return null;
+
+
+    // publishOn returns the same Flux but let it the subscription happens in specific thread defined by Scheduler
+    return flux.publishOn(Schedulers.boundedElastic()).doOnNext(user -> repository.save(user)).then();
   }
 }
