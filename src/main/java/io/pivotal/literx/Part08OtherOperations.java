@@ -1,9 +1,10 @@
 package io.pivotal.literx;
 
 import io.pivotal.literx.domain.User;
-import java.util.List;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 /**
  * Learn how to use various other operators.
@@ -17,21 +18,25 @@ public class Part08OtherOperations {
   // TODO Create a Flux of user from Flux of username, firstName and lastName.
   Flux<User> userFluxFromStringFlux(
       Flux<String> usernameFlux, Flux<String> firstNameFlux, Flux<String> lastNameFlux) {
-    return null;
+    // zip returns Tuple<Publisher1, Publisher2, Publisher3>
+    return Flux.zip(usernameFlux, firstNameFlux, lastNameFlux)
+            .map(tuple -> new User(tuple.getT1(), tuple.getT2(), tuple.getT3()));
   }
 
   // ========================================================================================
 
   // TODO Return the mono which returns its value faster
   Mono<User> useFastestMono(Mono<User> mono1, Mono<User> mono2) {
-    return null;
+    // Pick the first Mono which emits any signal
+    return Mono.firstWithSignal(mono1, mono2);
   }
 
   // ========================================================================================
 
   // TODO Return the flux which returns the first value faster
   Flux<User> useFastestFlux(Flux<User> flux1, Flux<User> flux2) {
-    return null;
+
+    return Flux.firstWithSignal(flux1, flux2);
   }
 
   // ========================================================================================
@@ -39,7 +44,8 @@ public class Part08OtherOperations {
   // TODO Convert the input Flux<User> to a Mono<Void> that represents the complete signal of the
   // flux
   Mono<Void> fluxCompletion(Flux<User> flux) {
-    return null;
+    // Return a Mono<Void> that completes when this Flux completes
+    return flux.then();
   }
 
   // ========================================================================================
@@ -47,7 +53,9 @@ public class Part08OtherOperations {
   // TODO Return a valid Mono of user for null input and non null input user (hint: Reactive Streams
   // do not accept null values)
   Mono<User> nullAwareUserToMono(User user) {
-    return null;
+    // Create a new Mono that emits the specified item if non null otherwise only emits onComplete
+    // this creates empty Mono when input is empty
+    return Mono.justOrEmpty(user);
   }
 
   // ========================================================================================
@@ -55,11 +63,13 @@ public class Part08OtherOperations {
   // TODO Return the same mono passed as input parameter, expect that it will emit User.SKYLER when
   // empty
   Mono<User> emptyToSkyler(Mono<User> mono) {
-    return null;
+    // this adds default value when input is empty
+    return mono.defaultIfEmpty(User.SKYLER);
   }
 
   // TODO Convert the input Flux<User> to a Mono<List<User>> containing list of collected flux values
   Mono<List<User>> fluxCollection(Flux<User> flux) {
-    return null;
+    // Collect all elements emitted by this Flux into a List that is emitted by the resulting Mono when this sequence completes.
+    return flux.collectList();
   }
 }

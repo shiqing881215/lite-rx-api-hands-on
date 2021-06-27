@@ -33,6 +33,7 @@ public class Part07Errors {
 
   // TODO Return a Mono<User> containing User.SAUL when an error occurs in the input Mono, else do
   // not change the input Mono.
+  // This could be useful if you want to provide a default result instead of throwing an exception
   Mono<User> betterCallSaulForBogusMono(Mono<User> mono) {
     // this will return mono itself if no error happens
     return mono.onErrorResume(e ->  Mono.just(User.SAUL));
