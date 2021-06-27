@@ -34,7 +34,8 @@ public class Part07Errors {
   // TODO Return a Mono<User> containing User.SAUL when an error occurs in the input Mono, else do
   // not change the input Mono.
   Mono<User> betterCallSaulForBogusMono(Mono<User> mono) {
-    return null;
+    // this will return mono itself if no error happens
+    return mono.onErrorResume(e ->  Mono.just(User.SAUL));
   }
 
   // ========================================================================================
@@ -42,15 +43,27 @@ public class Part07Errors {
   // TODO Return a Flux<User> containing User.SAUL and User.JESSE when an error occurs in the input
   // Flux, else do not change the input Flux.
   Flux<User> betterCallSaulAndJesseForBogusFlux(Flux<User> flux) {
-    return null;
+
+    return flux.onErrorResume(e -> Flux.just(User.SAUL, User.JESSE));
   }
 
   // ========================================================================================
 
   // TODO Implement a method that capitalizes each user of the incoming flux using the
   // #capitalizeUser method and emits an error containing a GetOutOfHereException error
+
+  // https://www.codingame.com/playgrounds/929/reactive-programming-with-reactor-3/Error
+  // this is to handle CheckedException (GetOutOfHereException)
+  // Exceptions.propagate(checkedException) convert checkedException -> RuntimeException so compiler doesn't complain
   Flux<User> capitalizeMany(Flux<User> flux) {
-    return null;
+
+    return flux.map(user -> {
+      try {
+        return capitalizeUser(user);
+      } catch (GetOutOfHereException e) {
+        throw Exceptions.propagate(e);
+      }
+    });
   }
 
   User capitalizeUser(User user) throws GetOutOfHereException {

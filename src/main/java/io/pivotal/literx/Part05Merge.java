@@ -38,4 +38,8 @@ public class Part05Merge {
 
     return Flux.concat(mono1, mono2);
   }
+
+  // Another one to see is zipWith
+  // https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html#zipWith-org.reactivestreams.Publisher-
+  // wait for both publisher to emit one element and zip them together into a tuple
 }
